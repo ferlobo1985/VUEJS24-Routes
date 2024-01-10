@@ -4,6 +4,7 @@ import Contact from '@/components/contact/index.vue'
 import Home from '@/components/home.vue'
 import Article from '@/components/articles/article.vue'
 import NotFound from '@/components/404.vue'
+import Notify from '@/components/notify.vue'
 
 
 const propsBack = (route) => {
@@ -19,7 +20,10 @@ const router = createRouter({
         {path:'/articles',component:Articles,children:[
             {path:':articleID',component:Article,props:propsBack}
         ]},
-        {path:'/contact',component:Contact},
+        {path:'/contact',components:{
+            default:Contact,
+            notify: Notify
+        },name:'contact'},
         {path:'/:notFound(.*)',component:NotFound}
     ],
     linkActiveClass:'active'
