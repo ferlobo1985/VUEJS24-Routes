@@ -3,14 +3,23 @@ import Articles from '@/components/articles/index.vue';
 import Contact from '@/components/contact/index.vue'
 import Home from '@/components/home.vue'
 import Article from '@/components/articles/article.vue'
+import NotFound from '@/components/404.vue'
+
+
+const propsBack = (route) => {
+    return {
+        crazy: route.path + 'some other data'
+    }
+}
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes:[
         {path:'/',component:Home},
         {path:'/articles',component:Articles},
-        {path:'/articles/:articleID',component:Article},
+        {path:'/articles/:articleID',component:Article,props:propsBack},
         {path:'/contact',component:Contact},
+        {path:'/:notFound(.*)',component:NotFound}
     ],
     linkActiveClass:'active'
 });
