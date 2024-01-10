@@ -9,7 +9,7 @@ const router = createRouter({
     routes:[
         {path:'/',component:Home},
         {path:'/articles',component:Articles},
-        {path:'/articles/:articleID/:name/:age',component:Article},
+        {path:'/articles/:articleID',component:Article},
         {path:'/contact',component:Contact},
     ],
     linkActiveClass:'active'
