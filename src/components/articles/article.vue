@@ -1,4 +1,7 @@
 <template>
+
+<router-link to="/articles/3">Go to a different article</router-link>
+
 <div v-if="Object.keys(article).length !== 0">
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
@@ -48,7 +51,7 @@
 <script setup>
   import axios from 'axios'
   import { useRoute } from 'vue-router'
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
 
   const route = useRoute();
   const article = ref({});
@@ -63,4 +66,11 @@
   onMounted(()=>{
     loadArticleData(route.params.articleID)
   })
+
+  watch(
+    ()=> route.params.articleID,
+    async newId => {
+      loadArticleData(newId)
+    }
+  )
 </script>
