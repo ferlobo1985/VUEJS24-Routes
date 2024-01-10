@@ -1,7 +1,8 @@
 <template>
   <app-header></app-header>
         <div class="container">
-          <home-component></home-component>
+          <router-view/>
+          <!-- <home-component></home-component> -->
           <!-- <articles-main></articles-main> -->
           <!-- <article-comp></article-comp> -->
           <!-- <contact-component></contact-component> -->
