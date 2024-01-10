@@ -16,8 +16,9 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes:[
         {path:'/',component:Home},
-        {path:'/articles',component:Articles},
-        {path:'/articles/:articleID',component:Article,props:propsBack},
+        {path:'/articles',component:Articles,children:[
+            {path:':articleID',component:Article,props:propsBack}
+        ]},
         {path:'/contact',component:Contact},
         {path:'/:notFound(.*)',component:NotFound}
     ],
