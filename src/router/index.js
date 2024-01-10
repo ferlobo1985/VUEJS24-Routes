@@ -14,13 +14,25 @@ const propsBack = (route) => {
     }
 }
 
+const checkAuth = () => {
+    const isAuth = true;
+    if(!isAuth) return '/login'
+}
+
+const isAdmin = () => {
+    const isAdmin = true;
+    if(!isAdmin) return '/'
+}
+
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes:[
         {path:'/',component:Home},
-        {path:'/articles',component:Articles,children:[
-            {path:':articleID',component:Article,props:propsBack}
-        ]},
+        {path:'/articles',component:Articles,
+            beforeEnter:[checkAuth,isAdmin]
+        },
+        {path:'/articles/:articleID',component:Article,props:propsBack},
         {path:'/contact',components:{
             default:Contact,
             notify: Notify
@@ -31,21 +43,21 @@ const router = createRouter({
     linkActiveClass:'active'
 });
 
-router.beforeEach((to,from)=>{
-    const isAuth = true;
+// router.beforeEach((to,from)=>{
+//     const isAuth = true;
 
-    if(to.path === '/'){
-        return true
-    } else {
-        if(to.path !== '/login' & !isAuth) return '/login';
-        if(to.path === '/login' & isAuth) return '/';
-        return true
-    }
-})
+//     if(to.path === '/'){
+//         return true
+//     } else {
+//         if(to.path !== '/login' & !isAuth) return '/login';
+//         if(to.path === '/login' & isAuth) return '/';
+//         return true
+//     }
+// })
 
 
-router.afterEach(()=>{
-    console.log('after each')
-})
+// router.afterEach(()=>{
+//     console.log('after each')
+// })
 
 export default router

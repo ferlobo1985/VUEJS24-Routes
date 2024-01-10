@@ -50,7 +50,7 @@
 
 <script setup>
   import axios from 'axios'
-  import { useRoute } from 'vue-router'
+  import { useRoute, onBeforeRouteUpdate } from 'vue-router'
   import { onMounted, ref, watch } from 'vue';
 
   const props = defineProps(['crazy']);
@@ -70,10 +70,14 @@
     loadArticleData(route.params.articleID)
   })
 
-  watch(
-    ()=> route.params.articleID,
-    async newId => {
-      loadArticleData(newId)
-    }
-  )
+  onBeforeRouteUpdate(async(to,from)=>{
+    loadArticleData(to.params.articleID)
+  })
+
+  // watch(
+  //   ()=> route.params.articleID,
+  //   async newId => {
+  //     loadArticleData(newId)
+  //   }
+  // )
 </script>
