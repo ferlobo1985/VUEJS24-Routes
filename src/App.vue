@@ -7,7 +7,6 @@
           <!-- <article-comp></article-comp> -->
           <!-- <contact-component></contact-component> -->
         </div>
-    <app-footer></app-footer>
 </template>
 
 <script setup>
