@@ -5,6 +5,7 @@ import Home from '@/components/home.vue'
 import Article from '@/components/articles/article.vue'
 import NotFound from '@/components/404.vue'
 import Notify from '@/components/notify.vue'
+import Login from '@/components/login.vue'
 
 
 const propsBack = (route) => {
@@ -24,9 +25,27 @@ const router = createRouter({
             default:Contact,
             notify: Notify
         },name:'contact'},
+        {path:'/login',component:Login},
         {path:'/:notFound(.*)',component:NotFound}
     ],
     linkActiveClass:'active'
 });
+
+router.beforeEach((to,from)=>{
+    const isAuth = true;
+
+    if(to.path === '/'){
+        return true
+    } else {
+        if(to.path !== '/login' & !isAuth) return '/login';
+        if(to.path === '/login' & isAuth) return '/';
+        return true
+    }
+})
+
+
+router.afterEach(()=>{
+    console.log('after each')
+})
 
 export default router
